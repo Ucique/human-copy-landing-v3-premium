@@ -26,6 +26,10 @@ npm run build
 npm run preview
 ```
 
-## Deploy hint
+## Deploy
 
-You can deploy the `dist` folder to any static host (e.g. GitHub Pages, Netlify, or Vercel).
+Pushes to `main` automatically build and deploy the site to GitHub Pages via Actions.
+
+## Live URL
+
+https://ucique.github.io/human-copy-landing-v3-premium/
