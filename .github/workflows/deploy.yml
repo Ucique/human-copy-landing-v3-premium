@@ -27,15 +27,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
-        if: ${{ hashFiles('package-lock.json') != '' }}
-
-      - name: Install dependencies (no lockfile)
         run: npm install
-        if: ${{ hashFiles('package-lock.json') == '' }}
 
       - name: Build
         run: npm run build
