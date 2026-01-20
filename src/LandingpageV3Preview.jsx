@@ -1,47 +1,12 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Lock, Sparkles, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Frame, THEME } from "./theme.jsx";
+import logoMark from "./assets/logo-mark.png";
+import profileCharlotte from "./assets/profile-charlotte-grude.jpg";
 
 const cn = (...c) => c.filter(Boolean).join(" ");
-
-// Premium, ruhig, kein Flimmern: tiefes Navy + Ivory + leiser Gold-Akzent.
-const THEME = {
-  bg: "#0B1020", // tiefes Navy (nicht Schwarz)
-  bg2: "#0E1730",
-  ink: "#F6F2E8", // warmes Ivory
-  ink2: "rgba(246,242,232,0.78)",
-  faint: "rgba(246,242,232,0.60)",
-  stroke: "rgba(246,242,232,0.14)",
-  stroke2: "rgba(246,242,232,0.10)",
-  card: "rgba(246,242,232,0.06)",
-  card2: "rgba(246,242,232,0.09)",
-  accent: "#D9B46C", // Gold (ruhig)
-  accent2: "rgba(217,180,108,0.28)",
-  accentHover: "#E4C585",
-};
-
-function Frame({ children }) {
-  return (
-    <div className="min-h-screen" style={{ background: THEME.bg, color: THEME.ink }}>
-      <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
-        {/* Keine Patterns. Nur weiche Lichtfelder. */}
-        <div
-          className="absolute -left-32 -top-32 h-[720px] w-[720px] rounded-full blur-[120px]"
-          style={{ background: "rgba(217,180,108,0.10)" }}
-        />
-        <div
-          className="absolute right-[-240px] top-[6%] h-[860px] w-[860px] rounded-full blur-[140px]"
-          style={{ background: "rgba(120,155,255,0.10)" }}
-        />
-        <div
-          className="absolute left-[8%] bottom-[-320px] h-[920px] w-[920px] rounded-full blur-[160px]"
-          style={{ background: "rgba(246,242,232,0.05)" }}
-        />
-      </div>
-      {children}
-    </div>
-  );
-}
 
 function Hairline() {
   return <div className="h-px w-full" style={{ background: THEME.stroke2 }} />;
@@ -139,8 +104,6 @@ function Bullet({ children }) {
   );
 }
 
-const LOGO_PATH = "/assets/brand/logo.png";
-const PROFILE_PATH = "/assets/brand/profile.jpg";
 const CONSENT_KEY = "hc_cookie_consent";
 const GA_MEASUREMENT_ID = "G-2DBL2MMR17";
 
@@ -150,7 +113,7 @@ function LogoMark() {
   if (failed) {
     return (
       <div
-        className="flex h-10 w-10 items-center justify-center rounded-2xl text-xs font-semibold"
+        className="flex h-6 w-6 items-center justify-center rounded-lg text-[10px] font-semibold md:h-7 md:w-7"
         style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2, color: THEME.accent }}
       >
         HC
@@ -160,42 +123,56 @@ function LogoMark() {
 
   return (
     <img
-      src={LOGO_PATH}
+      src={logoMark}
       alt="Human Copy"
       onError={() => setFailed(true)}
-      className="h-10 w-10 rounded-2xl object-cover"
+      className="h-6 w-6 rounded-lg object-cover md:h-7 md:w-7"
       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
     />
   );
 }
 
-function ProfileBadge() {
+function TrustBlock() {
   const [failed, setFailed] = useState(false);
 
   return (
-    <div className="flex items-center gap-3">
+    <div
+      className="flex items-center gap-4 rounded-2xl px-4 py-3"
+      style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
+    >
       {failed ? (
         <div
-          className="h-9 w-9 rounded-full"
-          style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
+          className="h-[72px] w-[72px] shrink-0 rounded-full md:h-[88px] md:w-[88px]"
+          style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card }}
         />
       ) : (
         <img
-          src={PROFILE_PATH}
-          alt="Charlotte"
+          src={profileCharlotte}
+          alt="Charlotte Grude"
           onError={() => setFailed(true)}
-          className="h-9 w-9 rounded-full object-cover"
-          style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
+          className="h-[72px] w-[72px] shrink-0 rounded-full object-cover object-center md:h-[88px] md:w-[88px]"
+          style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card }}
         />
       )}
-      <div className="text-xs" style={{ color: THEME.faint }}>
-        Charlotte · Copywriting &amp; Positionierung · Berlin
+      <div className="space-y-1">
+        <div className="text-sm font-semibold" style={{ color: THEME.ink }}>
+          Charlotte Grude — Copywriting &amp; Positionierung.
+        </div>
+        <div className="text-xs leading-relaxed" style={{ color: THEME.ink2 }}>
+          Über ein Jahrzehnt Erfahrung. Keine Templates. Klare Urteile.
+        </div>
+        <div className="text-[11px]" style={{ color: THEME.faint }}>
+          Antwort in 24–48h. Diskret. 1:1.
+        </div>
       </div>
     </div>
   );
 }
 
 function loadAnalytics() {
+  if (window[`ga-disable-${GA_MEASUREMENT_ID}`]) {
+    return;
+  }
   if (document.getElementById("ga-gtag")) {
     return;
   }
@@ -216,7 +193,7 @@ function loadAnalytics() {
 export default function LandingpageV3Preview() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [url, setUrl] = useState("");
+  const [link, setLink] = useState("");
   const [goal, setGoal] = useState("Mehr Anfragen");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("idle");
@@ -229,6 +206,9 @@ export default function LandingpageV3Preview() {
     const stored = window.localStorage.getItem(CONSENT_KEY);
     if (stored === "accepted" || stored === "rejected") {
       setConsent(stored);
+      if (stored === "rejected") {
+        window[`ga-disable-${GA_MEASUREMENT_ID}`] = true;
+      }
       setShowConsent(false);
     } else {
       setConsent("unknown");
@@ -245,13 +225,16 @@ export default function LandingpageV3Preview() {
   const preview = useMemo(() => {
     const n = name.trim() || "(Name)";
     const e = email.trim() || "(E-Mail)";
-    const u = url.trim() || "(Link/Doc)";
+    const u = link.trim() || "(Link/Doc)";
     const m = message.trim() || "(Worum geht’s – in einem Satz?)";
     return { n, e, u, m };
-  }, [name, email, url, message]);
+  }, [name, email, link, message]);
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (isSubmitting || status === "success") {
+      return;
+    }
     if (!email.trim() || !message.trim()) {
       setStatus("error");
       setStatusMessage("Bitte E-Mail und Nachricht ausfüllen.");
@@ -270,10 +253,9 @@ export default function LandingpageV3Preview() {
           name,
           email,
           goal,
-          url,
+          link,
           message,
-          page: "premium-v3",
-          source: "human-copy-landing-v3-premium",
+          source: "premium-v3",
         }),
       });
 
@@ -293,6 +275,11 @@ export default function LandingpageV3Preview() {
 
   function handleConsent(choice) {
     window.localStorage.setItem(CONSENT_KEY, choice);
+    if (choice === "rejected") {
+      window[`ga-disable-${GA_MEASUREMENT_ID}`] = true;
+    } else {
+      window[`ga-disable-${GA_MEASUREMENT_ID}`] = false;
+    }
     setConsent(choice);
     setShowConsent(false);
   }
@@ -301,11 +288,13 @@ export default function LandingpageV3Preview() {
     setShowConsent(true);
   }
 
+  const isLocked = isSubmitting || status === "success";
+
   return (
     <Frame>
       {/* Top */}
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <LogoMark />
           <div className="leading-tight">
             <div className="text-sm font-semibold" style={{ color: THEME.ink }}>Human Copy</div>
@@ -363,10 +352,6 @@ export default function LandingpageV3Preview() {
               <GhostButton onClick={() => document.getElementById("method")?.scrollIntoView({ behavior: "smooth" })}>
                 Wie ich arbeite
               </GhostButton>
-            </div>
-
-            <div className="mt-4">
-              <ProfileBadge />
             </div>
 
             <div className="mt-10 grid gap-3 md:grid-cols-3">
@@ -435,14 +420,22 @@ export default function LandingpageV3Preview() {
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="mt-6 space-y-3">
+              <form
+                onSubmit={handleSubmit}
+                action="https://formspree.io/f/mreelknq"
+                method="POST"
+                className="mt-6 space-y-3"
+              >
+                <input type="hidden" name="source" value="premium-v3" />
                 <div className="grid gap-3 md:grid-cols-2">
                   <label className="space-y-1">
                     <div className="text-xs" style={{ color: THEME.faint }}>Name</div>
                     <input
+                      name="name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Charlotte"
+                      placeholder="Dein Name"
+                      disabled={isLocked}
                       className="w-full rounded-2xl px-4 py-3 text-sm outline-none transition"
                       style={{
                         border: `1px solid ${THEME.stroke2}`,
@@ -454,11 +447,13 @@ export default function LandingpageV3Preview() {
                   <label className="space-y-1">
                     <div className="text-xs" style={{ color: THEME.faint }}>E-Mail</div>
                     <input
+                      name="email"
                       required
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="du@domain.de"
+                      disabled={isLocked}
                       className="w-full rounded-2xl px-4 py-3 text-sm outline-none transition"
                       style={{
                         border: `1px solid ${THEME.stroke2}`,
@@ -473,8 +468,10 @@ export default function LandingpageV3Preview() {
                   <div className="text-xs" style={{ color: THEME.faint }}>Was soll der Text auslösen?</div>
                   <div className="grid gap-3 md:grid-cols-2">
                     <select
+                      name="goal"
                       value={goal}
                       onChange={(e) => setGoal(e.target.value)}
+                      disabled={isLocked}
                       className="w-full rounded-2xl px-4 py-3 text-sm outline-none transition"
                       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.bg2, color: THEME.ink }}
                     >
@@ -485,9 +482,11 @@ export default function LandingpageV3Preview() {
                       <option value="Weniger Erklären">Weniger Erklären</option>
                     </select>
                     <input
-                      value={url}
-                      onChange={(e) => setUrl(e.target.value)}
+                      name="link"
+                      value={link}
+                      onChange={(e) => setLink(e.target.value)}
                       placeholder="Link oder Google Doc"
+                      disabled={isLocked}
                       className="w-full rounded-2xl px-4 py-3 text-sm outline-none transition"
                       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.bg2, color: THEME.ink }}
                     />
@@ -497,19 +496,21 @@ export default function LandingpageV3Preview() {
                 <label className="space-y-1">
                   <div className="text-xs" style={{ color: THEME.faint }}>Ein Satz. Kein Roman.</div>
                   <textarea
+                    name="message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     rows={4}
                     placeholder="Was passiert gerade stattdessen?"
                     required
+                    disabled={isLocked}
                     className="w-full resize-none rounded-2xl px-4 py-3 text-sm outline-none transition"
                     style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.bg2, color: THEME.ink }}
                   />
                 </label>
 
                 <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                  <PrimaryButton type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "Sende…" : "Anfrage senden"}
+                  <PrimaryButton type="submit" disabled={isLocked}>
+                    {isSubmitting ? "Sende…" : status === "success" ? "Gesendet" : "Anfrage senden"}
                   </PrimaryButton>
                   <div className="text-xs leading-relaxed" style={{ color: THEME.faint }}>
                     Keine Detector-Versprechen.
@@ -531,6 +532,10 @@ export default function LandingpageV3Preview() {
                   </div>
                 )}
               </form>
+
+              <div className="mt-5">
+                <TrustBlock />
+              </div>
 
               <div className="mt-6">
                 <Hairline />
@@ -694,21 +699,21 @@ export default function LandingpageV3Preview() {
                 </PrimaryButton>
                 <div className="text-xs" style={{ color: THEME.faint }}>
                   <div className="flex flex-wrap items-center gap-2">
-                    <a
-                      href="/impressum/"
+                    <Link
+                      to="/impressum"
                       className="transition"
                       style={{ color: THEME.faint }}
                     >
                       Impressum
-                    </a>
+                    </Link>
                     <span aria-hidden>·</span>
-                    <a
-                      href="/datenschutz/"
+                    <Link
+                      to="/datenschutz"
                       className="transition"
                       style={{ color: THEME.faint }}
                     >
                       Datenschutz
-                    </a>
+                    </Link>
                     <span aria-hidden>·</span>
                     <a
                       href="mailto:hello@human-copy.com"
