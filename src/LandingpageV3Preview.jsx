@@ -84,11 +84,16 @@ function GhostButton({ children, className, ...props }) {
   );
 }
 
-function Kpi({ title, value, note }) {
+function Kpi({ title, value, note, className, valueClassName }) {
   return (
-    <div className="rounded-3xl p-5" style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}>
+    <div
+      className={cn("rounded-3xl p-5", className)}
+      style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
+    >
       <div className="text-xs" style={{ color: THEME.faint }}>{title}</div>
-      <div className="mt-2 text-2xl font-semibold tracking-tight" style={{ color: THEME.ink }}>{value}</div>
+      <div className={cn("mt-2 text-2xl font-semibold tracking-tight", valueClassName)} style={{ color: THEME.ink }}>
+        {value}
+      </div>
       <div className="mt-1 text-xs" style={{ color: THEME.faint }}>{note}</div>
     </div>
   );
@@ -142,14 +147,14 @@ function TrustBlock() {
     >
       {failed ? (
         <div
-          className="h-28 w-28 rounded-full md:h-36 md:w-36"
+          className="h-32 w-32 rounded-full md:h-36 md:w-36"
         />
       ) : (
         <img
           src={profileCharlotte}
           alt="Charlotte Grude"
           onError={() => setFailed(true)}
-          className="h-28 w-28 rounded-full object-cover object-center md:h-36 md:w-36"
+          className="h-32 w-32 rounded-full object-cover object-center md:h-36 md:w-36"
         />
       )}
       <div className="space-y-2">
@@ -359,7 +364,13 @@ export default function LandingpageV3Preview() {
             <div className="mt-10 grid gap-3 md:grid-cols-3">
               <Kpi title="Antwortzeit" value="24–48h" note="für die erste Einschätzung" />
               <Kpi title="Format" value="1:1" note="direkt mit mir" />
-              <Kpi title="Lieferung" value="Überarbeitung" note="Seite, Headlines, CTA" />
+              <Kpi
+                title="Lieferung"
+                value="Überarbeitung"
+                note="Seite, Headlines, CTA"
+                className="px-6"
+                valueClassName="whitespace-nowrap"
+              />
             </div>
 
             <div className="mt-10">

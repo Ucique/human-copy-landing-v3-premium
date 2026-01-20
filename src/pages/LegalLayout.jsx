@@ -11,8 +11,7 @@ export default function LegalLayout({ title, children }) {
           <img
             src={logoMark}
             alt="Human Copy"
-            className="h-6 w-6 rounded-xl object-cover md:h-7 md:w-7"
-            style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
+            className="h-10 w-10 object-contain md:h-12 md:w-12"
           />
           <div className="text-sm font-semibold" style={{ color: THEME.ink }}>
             Human Copy
