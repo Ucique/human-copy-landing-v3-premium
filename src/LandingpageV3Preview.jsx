@@ -24,11 +24,12 @@ function Pill({ children }) {
   );
 }
 
-function Card({ children, className }) {
+function Card({ children, className, ...props }) {
   return (
     <div
       className={cn("rounded-3xl p-6 md:p-7", className)}
       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card }}
+      {...props}
     >
       {children}
     </div>
@@ -126,7 +127,7 @@ function LogoMark() {
       src={logoMark}
       alt="Human Copy"
       onError={() => setFailed(true)}
-      className="h-8 w-auto object-contain md:h-10"
+      className="h-8 w-8 object-contain md:h-10 md:w-10"
     />
   );
 }
@@ -136,7 +137,7 @@ function TrustBlock() {
 
   return (
     <div
-      className="flex items-center gap-4 rounded-2xl px-4 py-3"
+      className="flex items-center gap-5 rounded-2xl px-4 py-3"
       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
     >
       {failed ? (
@@ -200,6 +201,10 @@ export default function LandingpageV3Preview() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [consent, setConsent] = useState("unknown");
   const [showConsent, setShowConsent] = useState(false);
+
+  const scrollToForm = () => {
+    document.getElementById("private-anfrage")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   React.useEffect(() => {
     const stored = window.localStorage.getItem(CONSENT_KEY);
@@ -293,7 +298,7 @@ export default function LandingpageV3Preview() {
     <Frame>
       {/* Top */}
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-3">
           <LogoMark />
           <div className="leading-tight">
             <div className="text-sm font-semibold" style={{ color: THEME.ink }}>Human Copy</div>
@@ -305,9 +310,9 @@ export default function LandingpageV3Preview() {
           <GhostButton onClick={() => document.getElementById("proof")?.scrollIntoView({ behavior: "smooth" })}>
             Beispiele
           </GhostButton>
-          <PrimaryButton onClick={() => document.getElementById("intake")?.scrollIntoView({ behavior: "smooth" })}>
+          <GhostButton onClick={scrollToForm}>
             Private Anfrage
-          </PrimaryButton>
+          </GhostButton>
         </div>
       </header>
 
@@ -345,7 +350,7 @@ export default function LandingpageV3Preview() {
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <PrimaryButton onClick={() => document.getElementById("intake")?.scrollIntoView({ behavior: "smooth" })}>
+              <PrimaryButton onClick={scrollToForm}>
                 Private Anfrage
               </PrimaryButton>
               <GhostButton onClick={() => document.getElementById("method")?.scrollIntoView({ behavior: "smooth" })}>
@@ -399,12 +404,11 @@ export default function LandingpageV3Preview() {
 
           {/* Intake */}
           <motion.aside
-            id="intake"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.05 }}
           >
-            <Card className="p-6 md:p-7">
+            <Card id="private-anfrage" className="p-6 md:p-7">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="text-sm font-semibold" style={{ color: THEME.ink }}>Private Anfrage</div>
@@ -690,7 +694,7 @@ export default function LandingpageV3Preview() {
                 </div>
               </div>
               <div className="flex flex-col gap-3">
-                <PrimaryButton onClick={() => document.getElementById("intake")?.scrollIntoView({ behavior: "smooth" })}>
+                <PrimaryButton onClick={scrollToForm}>
                   Private Anfrage
                 </PrimaryButton>
                 <div className="text-xs" style={{ color: THEME.faint }}>
@@ -711,13 +715,14 @@ export default function LandingpageV3Preview() {
                       Datenschutz
                     </Link>
                     <span aria-hidden>·</span>
-                    <a
-                      href="mailto:hello@human-copy.com"
+                    <button
+                      type="button"
+                      onClick={scrollToForm}
                       className="transition"
                       style={{ color: THEME.faint }}
                     >
-                      Kontakt
-                    </a>
+                      Zum Formular
+                    </button>
                     <span aria-hidden>·</span>
                     <button
                       type="button"
