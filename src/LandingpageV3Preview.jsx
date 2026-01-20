@@ -71,10 +71,11 @@ function Card({ children, className }) {
 }
 
 function PrimaryButton({ children, className, ...props }) {
+  const isDisabled = props.disabled;
   return (
     <button
       className={cn(
-        "group inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition hover:translate-y-[-1px] active:translate-y-[0px]",
+        "group inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition hover:translate-y-[-1px] active:translate-y-[0px] disabled:cursor-not-allowed disabled:opacity-70",
         className
       )}
       style={{
@@ -82,8 +83,16 @@ function PrimaryButton({ children, className, ...props }) {
         color: "#1A140B",
         boxShadow: "0 18px 55px -28px rgba(217,180,108,0.45)",
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = THEME.accentHover)}
-      onMouseLeave={(e) => (e.currentTarget.style.background = THEME.accent)}
+      onMouseEnter={(e) => {
+        if (!isDisabled) {
+          e.currentTarget.style.background = THEME.accentHover;
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!isDisabled) {
+          e.currentTarget.style.background = THEME.accent;
+        }
+      }}
       {...props}
     >
       {children}
@@ -130,13 +139,108 @@ function Bullet({ children }) {
   );
 }
 
+const LOGO_PATH = "/assets/brand/logo.png";
+const PROFILE_PATH = "/assets/brand/profile.jpg";
+const CONSENT_KEY = "hc_cookie_consent";
+const GA_MEASUREMENT_ID = "G-2DBL2MMR17";
+
+function LogoMark() {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div
+        className="flex h-10 w-10 items-center justify-center rounded-2xl text-xs font-semibold"
+        style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2, color: THEME.accent }}
+      >
+        HC
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={LOGO_PATH}
+      alt="Human Copy"
+      onError={() => setFailed(true)}
+      className="h-10 w-10 rounded-2xl object-cover"
+      style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
+    />
+  );
+}
+
+function ProfileBadge() {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="flex items-center gap-3">
+      {failed ? (
+        <div
+          className="h-9 w-9 rounded-full"
+          style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
+        />
+      ) : (
+        <img
+          src={PROFILE_PATH}
+          alt="Charlotte"
+          onError={() => setFailed(true)}
+          className="h-9 w-9 rounded-full object-cover"
+          style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
+        />
+      )}
+      <div className="text-xs" style={{ color: THEME.faint }}>
+        Charlotte · Copywriting &amp; Positionierung · Berlin
+      </div>
+    </div>
+  );
+}
+
+function loadAnalytics() {
+  if (document.getElementById("ga-gtag")) {
+    return;
+  }
+  const script = document.createElement("script");
+  script.id = "ga-gtag";
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", GA_MEASUREMENT_ID);
+}
+
 export default function LandingpageV3Preview() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [url, setUrl] = useState("");
   const [goal, setGoal] = useState("Mehr Anfragen");
   const [message, setMessage] = useState("");
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle");
+  const [statusMessage, setStatusMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [consent, setConsent] = useState("unknown");
+  const [showConsent, setShowConsent] = useState(false);
+
+  React.useEffect(() => {
+    const stored = window.localStorage.getItem(CONSENT_KEY);
+    if (stored === "accepted" || stored === "rejected") {
+      setConsent(stored);
+      setShowConsent(false);
+    } else {
+      setConsent("unknown");
+      setShowConsent(true);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (consent === "accepted") {
+      loadAnalytics();
+    }
+  }, [consent]);
 
   const preview = useMemo(() => {
     const n = name.trim() || "(Name)";
@@ -146,10 +250,55 @@ export default function LandingpageV3Preview() {
     return { n, e, u, m };
   }, [name, email, url, message]);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setSent(true);
-    window.setTimeout(() => setSent(false), 2200);
+    if (!email.trim() || !message.trim()) {
+      setStatus("error");
+      setStatusMessage("Bitte E-Mail und Nachricht ausfüllen.");
+      return;
+    }
+    setIsSubmitting(true);
+    setStatus("idle");
+    setStatusMessage("");
+    try {
+      const response = await fetch("https://formspree.io/f/mreelknq", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          goal,
+          url,
+          message,
+          page: "premium-v3",
+          source: "human-copy-landing-v3-premium",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Formspree error");
+      }
+
+      setStatus("success");
+      setStatusMessage("Danke. Ich melde mich in 24–48h.");
+    } catch (error) {
+      setStatus("error");
+      setStatusMessage("Senden fehlgeschlagen. Bitte versuch’s nochmal oder mail an hello@human-copy.com.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  function handleConsent(choice) {
+    window.localStorage.setItem(CONSENT_KEY, choice);
+    setConsent(choice);
+    setShowConsent(false);
+  }
+
+  function openConsent() {
+    setShowConsent(true);
   }
 
   return (
@@ -157,10 +306,7 @@ export default function LandingpageV3Preview() {
       {/* Top */}
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <div className="flex items-center gap-3">
-          <div
-            className="h-10 w-10 rounded-2xl"
-            style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
-          />
+          <LogoMark />
           <div className="leading-tight">
             <div className="text-sm font-semibold" style={{ color: THEME.ink }}>Human Copy</div>
             <div className="text-xs" style={{ color: THEME.faint }}>Copywriting · Positionierung · Premium-Überarbeitung</div>
@@ -217,6 +363,10 @@ export default function LandingpageV3Preview() {
               <GhostButton onClick={() => document.getElementById("method")?.scrollIntoView({ behavior: "smooth" })}>
                 Wie ich arbeite
               </GhostButton>
+            </div>
+
+            <div className="mt-4">
+              <ProfileBadge />
             </div>
 
             <div className="mt-10 grid gap-3 md:grid-cols-3">
@@ -304,6 +454,8 @@ export default function LandingpageV3Preview() {
                   <label className="space-y-1">
                     <div className="text-xs" style={{ color: THEME.faint }}>E-Mail</div>
                     <input
+                      required
+                      type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="du@domain.de"
@@ -349,13 +501,16 @@ export default function LandingpageV3Preview() {
                     onChange={(e) => setMessage(e.target.value)}
                     rows={4}
                     placeholder="Was passiert gerade stattdessen?"
+                    required
                     className="w-full resize-none rounded-2xl px-4 py-3 text-sm outline-none transition"
                     style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.bg2, color: THEME.ink }}
                   />
                 </label>
 
                 <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                  <PrimaryButton type="submit">Anfrage senden</PrimaryButton>
+                  <PrimaryButton type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Sende…" : "Anfrage senden"}
+                  </PrimaryButton>
                   <div className="text-xs leading-relaxed" style={{ color: THEME.faint }}>
                     Keine Detector-Versprechen.
                     <br />
@@ -363,9 +518,16 @@ export default function LandingpageV3Preview() {
                   </div>
                 </div>
 
-                {sent && (
-                  <div className="mt-3 rounded-2xl px-4 py-3 text-sm" style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2, color: THEME.ink2 }}>
-                    Demo-Submit. In echt würdest du hier dein Form-Backend anschließen.
+                {status !== "idle" && (
+                  <div
+                    className="mt-3 rounded-2xl px-4 py-3 text-sm"
+                    style={{
+                      border: `1px solid ${THEME.stroke2}`,
+                      background: THEME.card2,
+                      color: status === "success" ? THEME.ink : THEME.ink2,
+                    }}
+                  >
+                    {statusMessage}
                   </div>
                 )}
               </form>
@@ -531,15 +693,74 @@ export default function LandingpageV3Preview() {
                   Private Anfrage
                 </PrimaryButton>
                 <div className="text-xs" style={{ color: THEME.faint }}>
-                  Impressum · Datenschutz · Kontakt
-                  <br />
-                  (Platzhalter in der Preview)
+                  <div className="flex flex-wrap items-center gap-2">
+                    <a
+                      href="/impressum/"
+                      className="transition"
+                      style={{ color: THEME.faint }}
+                    >
+                      Impressum
+                    </a>
+                    <span aria-hidden>·</span>
+                    <a
+                      href="/datenschutz/"
+                      className="transition"
+                      style={{ color: THEME.faint }}
+                    >
+                      Datenschutz
+                    </a>
+                    <span aria-hidden>·</span>
+                    <a
+                      href="mailto:hello@human-copy.com"
+                      className="transition"
+                      style={{ color: THEME.faint }}
+                    >
+                      Kontakt
+                    </a>
+                    <span aria-hidden>·</span>
+                    <button
+                      type="button"
+                      onClick={openConsent}
+                      className="transition"
+                      style={{ color: THEME.faint }}
+                    >
+                      Cookie-Einstellungen
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </Card>
         </footer>
       </main>
+
+      {showConsent && (
+        <div className="fixed bottom-24 left-0 right-0 z-30 mx-auto max-w-6xl px-6 md:bottom-6">
+          <Card className="flex flex-col gap-4 p-5 md:flex-row md:items-center md:justify-between">
+            <div className="text-xs leading-relaxed" style={{ color: THEME.ink2 }}>
+              Wir nutzen Cookies nur für Statistik, wenn du zustimmst. Notwendige Funktionen bleiben aktiv.
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                className="rounded-2xl px-4 py-2 text-xs font-semibold"
+                style={{ border: `1px solid ${THEME.stroke2}`, color: THEME.ink2 }}
+                onClick={() => handleConsent("rejected")}
+              >
+                Ablehnen
+              </button>
+              <button
+                type="button"
+                className="rounded-2xl px-4 py-2 text-xs font-semibold"
+                style={{ background: THEME.accent, color: "#1A140B" }}
+                onClick={() => handleConsent("accepted")}
+              >
+                Akzeptieren
+              </button>
+            </div>
+          </Card>
+        </div>
+      )}
 
       {/* Mobile CTA */}
       <div className="fixed bottom-4 left-0 right-0 z-20 mx-auto flex max-w-6xl justify-center px-6 md:hidden">
