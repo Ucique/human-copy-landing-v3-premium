@@ -142,16 +142,16 @@ function TrustBlock() {
     >
       {failed ? (
         <div
-          className="h-14 w-14 rounded-full md:h-16 md:w-16"
-          style={{ border: `1px solid ${THEME.stroke}`, background: THEME.card }}
+          className="h-[72px] w-[72px] shrink-0 rounded-full md:h-[88px] md:w-[88px]"
+          style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card }}
         />
       ) : (
         <img
           src={profileCharlotte}
           alt="Charlotte Grude"
           onError={() => setFailed(true)}
-          className="h-14 w-14 rounded-full object-cover md:h-16 md:w-16"
-          style={{ border: "1px solid rgba(255,255,255,0.12)", background: THEME.card }}
+          className="h-[72px] w-[72px] shrink-0 rounded-full object-cover object-center md:h-[88px] md:w-[88px]"
+          style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card }}
         />
       )}
       <div className="space-y-1">
