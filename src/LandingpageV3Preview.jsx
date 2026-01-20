@@ -127,7 +127,7 @@ function LogoMark() {
       src={logoMark}
       alt="Human Copy"
       onError={() => setFailed(true)}
-      className="h-8 w-8 object-contain md:h-10 md:w-10"
+      className="h-10 w-10 object-contain md:h-12 md:w-12"
     />
   );
 }
@@ -137,30 +137,30 @@ function TrustBlock() {
 
   return (
     <div
-      className="flex items-center gap-7 rounded-2xl px-6 py-5"
+      className="flex flex-col gap-4 rounded-2xl px-7 py-6 sm:flex-row sm:items-center sm:gap-8"
       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
     >
       {failed ? (
         <div
-          className="h-24 w-24 rounded-full sm:h-28 sm:w-28 md:h-36 md:w-36"
+          className="h-28 w-28 rounded-full md:h-36 md:w-36"
         />
       ) : (
         <img
           src={profileCharlotte}
           alt="Charlotte Grude"
           onError={() => setFailed(true)}
-          className="h-24 w-24 rounded-full object-cover object-center sm:h-28 sm:w-28 md:h-36 md:w-36"
+          className="h-28 w-28 rounded-full object-cover object-center md:h-36 md:w-36"
         />
       )}
-      <div className="space-y-1">
+      <div className="space-y-2">
         <div className="text-sm font-semibold" style={{ color: THEME.ink }}>
           Charlotte Grude — Copywriting &amp; Positionierung
         </div>
         <div className="text-xs leading-relaxed" style={{ color: THEME.ink2 }}>
-          Premium-Landingpages, Angebote und Positionierung für selbstständige Marken.
+          Du bekommst eine klare Einschätzung deiner Seite – mit konkreten Hinweisen, was du ändern solltest, und warum.
         </div>
         <div className="text-[11px]" style={{ color: THEME.faint }}>
-          Antwort in 24–48h. 1:1 Zusammenarbeit. Diskret.
+          Antwort in 24–48h. Diskret. Direkt.
         </div>
       </div>
     </div>
@@ -389,7 +389,7 @@ export default function LandingpageV3Preview() {
                     <div>
                       <div className="text-sm font-semibold" style={{ color: THEME.ink }}>Diskret. 1:1. Premium-Standard.</div>
                       <div className="mt-1 text-sm leading-relaxed" style={{ color: THEME.ink2 }}>
-                        Premium heißt: wenige Projekte, hohe Qualität.
+                        Premium heißt: wenige Slots. Kein Massenprodukt.
                         <br />
                         Keine Massenabfertigung.
                       </div>
@@ -513,9 +513,6 @@ export default function LandingpageV3Preview() {
                   <PrimaryButton type="submit" disabled={isLocked}>
                     {isSubmitting ? "Sende…" : status === "success" ? "Gesendet" : "Anfrage senden"}
                   </PrimaryButton>
-                  <div className="text-xs leading-relaxed" style={{ color: THEME.faint }}>
-                    Antwort in 24–48h. Persönlich.
-                  </div>
                 </div>
 
                 {status !== "idle" && (
