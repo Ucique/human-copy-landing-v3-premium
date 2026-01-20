@@ -5,7 +5,10 @@ import LegalLayout from "./LegalLayout";
 export default function Datenschutz() {
   return (
     <LegalLayout title="Datenschutzerklärung">
-      <Link to="/" className="text-sm">
+      <Link
+        to="/"
+        className="inline-flex items-center text-sm text-neutral-500 transition hover:text-neutral-700 hover:underline"
+      >
         ← Zurück
       </Link>
       <section>
