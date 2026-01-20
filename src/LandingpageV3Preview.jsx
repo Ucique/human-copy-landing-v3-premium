@@ -114,7 +114,7 @@ function LogoMark() {
   if (failed) {
     return (
       <div
-        className="flex h-8 w-8 items-center justify-center text-[10px] font-semibold md:h-10 md:w-10"
+        className="flex h-8 items-center justify-center text-[10px] font-semibold md:h-10"
         style={{ color: THEME.accent }}
       >
         HC
