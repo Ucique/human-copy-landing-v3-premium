@@ -113,8 +113,8 @@ function LogoMark() {
   if (failed) {
     return (
       <div
-        className="flex h-6 w-6 items-center justify-center rounded-lg text-[10px] font-semibold md:h-7 md:w-7"
-        style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2, color: THEME.accent }}
+        className="flex h-8 items-center justify-center text-[10px] font-semibold md:h-10"
+        style={{ color: THEME.accent }}
       >
         HC
       </div>
@@ -126,8 +126,7 @@ function LogoMark() {
       src={logoMark}
       alt="Human Copy"
       onError={() => setFailed(true)}
-      className="h-6 w-6 rounded-lg object-cover md:h-7 md:w-7"
-      style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
+      className="h-8 w-auto object-contain md:h-10"
     />
   );
 }
@@ -142,16 +141,16 @@ function TrustBlock() {
     >
       {failed ? (
         <div
-          className="h-14 w-14 rounded-full md:h-16 md:w-16"
-          style={{ border: `1px solid ${THEME.stroke}`, background: THEME.card }}
+          className="h-18 w-18 rounded-full md:h-24 md:w-24"
+          style={{ background: THEME.card }}
         />
       ) : (
         <img
           src={profileCharlotte}
           alt="Charlotte Grude"
           onError={() => setFailed(true)}
-          className="h-14 w-14 rounded-full object-cover md:h-16 md:w-16"
-          style={{ border: "1px solid rgba(255,255,255,0.12)", background: THEME.card }}
+          className="h-18 w-18 rounded-full object-cover object-center md:h-24 md:w-24"
+          style={{ background: THEME.card }}
         />
       )}
       <div className="space-y-1">
@@ -627,9 +626,6 @@ export default function LandingpageV3Preview() {
               Mehr Raum, damit der Satz wirkt.
             </div>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <PrimaryButton onClick={() => document.getElementById("intake")?.scrollIntoView({ behavior: "smooth" })}>
-                Private Anfrage
-              </PrimaryButton>
               <GhostButton onClick={() => document.getElementById("faq")?.scrollIntoView({ behavior: "smooth" })}>
                 Fragen
               </GhostButton>
@@ -768,13 +764,6 @@ export default function LandingpageV3Preview() {
       )}
 
       {/* Mobile CTA */}
-      <div className="fixed bottom-4 left-0 right-0 z-20 mx-auto flex max-w-6xl justify-center px-6 md:hidden">
-        <div className="w-full rounded-3xl p-2" style={{ border: `1px solid ${THEME.stroke2}`, background: "rgba(11,16,32,0.75)", backdropFilter: "blur(10px)" }}>
-          <PrimaryButton className="w-full" onClick={() => document.getElementById("intake")?.scrollIntoView({ behavior: "smooth" })}>
-            Private Anfrage
-          </PrimaryButton>
-        </div>
-      </div>
     </Frame>
   );
 }
