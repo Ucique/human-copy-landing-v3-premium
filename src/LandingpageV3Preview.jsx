@@ -137,21 +137,19 @@ function TrustBlock() {
 
   return (
     <div
-      className="flex items-center gap-5 rounded-2xl px-4 py-3"
+      className="flex items-center gap-6 rounded-2xl px-5 py-4"
       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
     >
       {failed ? (
         <div
-          className="h-18 w-18 rounded-full md:h-24 md:w-24"
-          style={{ background: THEME.card }}
+          className="h-24 w-24 rounded-full sm:h-28 sm:w-28 md:h-32 md:w-32"
         />
       ) : (
         <img
           src={profileCharlotte}
           alt="Charlotte Grude"
           onError={() => setFailed(true)}
-          className="h-18 w-18 rounded-full object-cover object-center md:h-24 md:w-24"
-          style={{ background: THEME.card }}
+          className="h-24 w-24 rounded-full object-cover object-center sm:h-28 sm:w-28 md:h-32 md:w-32"
         />
       )}
       <div className="space-y-1">
@@ -516,9 +514,7 @@ export default function LandingpageV3Preview() {
                     {isSubmitting ? "Sende…" : status === "success" ? "Gesendet" : "Anfrage senden"}
                   </PrimaryButton>
                   <div className="text-xs leading-relaxed" style={{ color: THEME.faint }}>
-                    Keine Detector-Versprechen.
-                    <br />
-                    Keine Conversion-Zauberei.
+                    Keine Tricks. Urteil.
                   </div>
                 </div>
 
