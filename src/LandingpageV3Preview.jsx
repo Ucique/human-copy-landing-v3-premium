@@ -385,7 +385,7 @@ export default function LandingpageV3Preview() {
               </div>
               <div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur sm:col-span-6">
                 <div className="text-xs uppercase tracking-wide text-white/60">UMFANG</div>
-                <div className="mt-2 text-xl font-semibold leading-tight text-white whitespace-normal break-words sm:text-[22px]">Überarbeitung/Erstellung</div>
+                <div className="mt-2 text-xl font-semibold leading-tight text-white whitespace-normal break-words sm:text-[22px]">Überarbeitung</div>
                 <div className="mt-1 text-sm text-white/60">Seite, Headline, CTA</div>
               </div>
             </div>
