@@ -137,30 +137,30 @@ function TrustBlock() {
 
   return (
     <div
-      className="flex items-center gap-6 rounded-2xl px-5 py-4"
+      className="flex items-center gap-7 rounded-2xl px-6 py-5"
       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
     >
       {failed ? (
         <div
-          className="h-24 w-24 rounded-full sm:h-28 sm:w-28 md:h-32 md:w-32"
+          className="h-24 w-24 rounded-full sm:h-28 sm:w-28 md:h-36 md:w-36"
         />
       ) : (
         <img
           src={profileCharlotte}
           alt="Charlotte Grude"
           onError={() => setFailed(true)}
-          className="h-24 w-24 rounded-full object-cover object-center sm:h-28 sm:w-28 md:h-32 md:w-32"
+          className="h-24 w-24 rounded-full object-cover object-center sm:h-28 sm:w-28 md:h-36 md:w-36"
         />
       )}
       <div className="space-y-1">
         <div className="text-sm font-semibold" style={{ color: THEME.ink }}>
-          Charlotte Grude — Copywriting &amp; Positionierung.
+          Charlotte Grude — Copywriting &amp; Positionierung
         </div>
         <div className="text-xs leading-relaxed" style={{ color: THEME.ink2 }}>
-          Über ein Jahrzehnt Erfahrung. Keine Templates. Klare Urteile.
+          Premium-Landingpages, Angebote und Positionierung für selbstständige Marken.
         </div>
         <div className="text-[11px]" style={{ color: THEME.faint }}>
-          Antwort in 24–48h. Diskret. 1:1.
+          Antwort in 24–48h. 1:1 Zusammenarbeit. Diskret.
         </div>
       </div>
     </div>
@@ -324,9 +324,9 @@ export default function LandingpageV3Preview() {
             className="pt-2"
           >
             <div className="flex flex-wrap items-center gap-3">
-              <Pill>Kein Content. Ein Eingriff.</Pill>
+              <Pill>Premium-Überarbeitung für klare Angebote.</Pill>
               <span className="text-xs" style={{ color: THEME.faint }}>
-                Für Menschen, die nicht mehr erklären wollen.
+                Für Beratungen, Studios und Services mit Anspruch.
               </span>
             </div>
 
@@ -334,17 +334,17 @@ export default function LandingpageV3Preview() {
               className="mt-6 text-4xl font-semibold tracking-tight md:text-6xl"
               style={{ fontFamily: "ui-serif, Georgia, Cambria, Times New Roman, Times, serif" }}
             >
-              Deine Seite klingt okay.
+              Deine Seite erklärt zu viel.
               <br />
-              <span style={{ color: THEME.accent }}>Und verliert trotzdem.</span>
+              <span style={{ color: THEME.accent }}>Ich mache daraus ein Angebot, das verkauft.</span>
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-relaxed md:text-lg" style={{ color: THEME.ink2 }}>
-              Ich schreibe nicht „schöner“.
+              Du gibst mir deine Landingpage oder Website.
               <br />
-              Ich mache sichtbar, wofür du stehst — und wofür nicht.
+              Ich schärfe Positionierung, Headline, Nutzen und CTA.
               <br />
-              Danach fühlt sich dein Angebot teurer an. Weil es klarer ist.
+              Ergebnis: eine ruhige Seite, die Anfragen und höhere Preise möglich macht.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -358,8 +358,8 @@ export default function LandingpageV3Preview() {
 
             <div className="mt-10 grid gap-3 md:grid-cols-3">
               <Kpi title="Antwortzeit" value="24–48h" note="für die erste Einschätzung" />
-              <Kpi title="Format" value="1:1" note="kein Agentur-Workflow" />
-              <Kpi title="Fokus" value="Wirkung" note="nicht Tool-Optimierung" />
+              <Kpi title="Format" value="1:1" note="direkt mit mir" />
+              <Kpi title="Lieferung" value="Überarbeitung" note="Seite, Headlines, CTA" />
             </div>
 
             <div className="mt-10">
@@ -371,11 +371,11 @@ export default function LandingpageV3Preview() {
                       <Shield className="h-4 w-4" style={{ color: THEME.accent }} />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold" style={{ color: THEME.ink }}>Keine Show. Kein Marketing-Lärm.</div>
+                      <div className="text-sm font-semibold" style={{ color: THEME.ink }}>Klare Überarbeitung statt lauter Kampagne.</div>
                       <div className="mt-1 text-sm leading-relaxed" style={{ color: THEME.ink2 }}>
-                        Du bekommst eine ruhige, präzise Überarbeitung.
+                        Du bekommst eine ruhige, präzise Version deiner Seite.
                         <br />
-                        Mit Urteil. Nicht mit Folien.
+                        Direkt, konkret, ohne Umwege.
                       </div>
                     </div>
                   </div>
@@ -387,11 +387,11 @@ export default function LandingpageV3Preview() {
                       <Lock className="h-4 w-4" style={{ color: THEME.accent }} />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold" style={{ color: THEME.ink }}>Diskret. Ohne „Look at me“.</div>
+                      <div className="text-sm font-semibold" style={{ color: THEME.ink }}>Diskret. 1:1. Premium-Standard.</div>
                       <div className="mt-1 text-sm leading-relaxed" style={{ color: THEME.ink2 }}>
-                        Premium heißt: wenig Leute, hohe Qualität.
+                        Premium heißt: wenige Projekte, hohe Qualität.
                         <br />
-                        Kein Massenprodukt.
+                        Keine Massenabfertigung.
                       </div>
                     </div>
                   </div>
@@ -413,7 +413,7 @@ export default function LandingpageV3Preview() {
                   <div className="mt-1 text-sm leading-relaxed" style={{ color: THEME.ink2 }}>
                     Du schickst mir eine Seite oder ein Doc.
                     <br />
-                    Ich antworte mit einer Einschätzung + nächstem Schritt.
+                    Ich antworte mit Einschätzung und nächstem Schritt.
                   </div>
                 </div>
                 <div className="hidden rounded-2xl px-3 py-2 text-xs md:block" style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2, color: THEME.faint }}>
@@ -514,7 +514,7 @@ export default function LandingpageV3Preview() {
                     {isSubmitting ? "Sende…" : status === "success" ? "Gesendet" : "Anfrage senden"}
                   </PrimaryButton>
                   <div className="text-xs leading-relaxed" style={{ color: THEME.faint }}>
-                    Keine Tricks. Urteil.
+                    Antwort in 24–48h. Persönlich.
                   </div>
                 </div>
 
@@ -541,7 +541,7 @@ export default function LandingpageV3Preview() {
               </div>
 
               <div className="mt-5 space-y-3">
-                <div className="text-xs font-semibold" style={{ color: THEME.faint }}>Live-Vorschau (nur zur Wirkung)</div>
+                <div className="text-xs font-semibold" style={{ color: THEME.faint }}>Live-Vorschau</div>
                 <div className="rounded-3xl p-4" style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}>
                   <div className="text-xs" style={{ color: THEME.faint }}>Anfrage</div>
                   <div className="mt-2 space-y-1 text-sm" style={{ color: THEME.ink2 }}>
@@ -556,7 +556,7 @@ export default function LandingpageV3Preview() {
             </Card>
 
             <div className="mt-6 text-xs" style={{ color: THEME.faint }}>
-              Hinweis: Premium bedeutet auch: weniger Slots. Wenn’s passt, gehen wir weiter.
+              Hinweis: Premium bedeutet auch: begrenzte Slots. Wenn’s passt, gehen wir weiter.
             </div>
           </motion.aside>
         </div>
@@ -569,30 +569,30 @@ export default function LandingpageV3Preview() {
         <section className="mt-10 grid gap-6 lg:grid-cols-3">
           <Card>
             <div className="text-xs" style={{ color: THEME.faint }}>Was hier passiert</div>
-            <div className="mt-3 text-xl font-semibold" style={{ color: THEME.ink }}>Entscheidung statt Erklärung.</div>
+            <div className="mt-3 text-xl font-semibold" style={{ color: THEME.ink }}>Klarheit statt Kompromiss.</div>
             <div className="mt-3 space-y-3">
-              <Bullet>Ich entferne Text, der nur korrekt klingt.</Bullet>
-              <Bullet>Ich setze klare Grenzen: wofür du stehst.</Bullet>
-              <Bullet>Ich mache dein Angebot lesbar — für Leute mit Geld.</Bullet>
+              <Bullet>Ich streiche alles, was nur beschäftigt.</Bullet>
+              <Bullet>Ich schärfe Positionierung und Nutzenversprechen.</Bullet>
+              <Bullet>Ich mache dein Angebot lesbar für Premium-Kund:innen.</Bullet>
             </div>
           </Card>
 
           <Card>
             <div className="text-xs" style={{ color: THEME.faint }}>Was du bekommst</div>
-            <div className="mt-3 text-xl font-semibold" style={{ color: THEME.ink }}>Eine Seite, die hält.</div>
+            <div className="mt-3 text-xl font-semibold" style={{ color: THEME.ink }}>Eine Seite, die verkauft.</div>
             <div className="mt-3 space-y-3">
-              <Bullet>Überarbeitung deiner Landingpage/Website (klar & knapp).</Bullet>
-              <Bullet>Headline-Set + CTA-Set (für Tests).</Bullet>
-              <Bullet>Ton, der nicht bettelt.</Bullet>
+              <Bullet>Überarbeitung deiner Landingpage oder Website.</Bullet>
+              <Bullet>Headline-Set + CTA-Set für Tests.</Bullet>
+              <Bullet>Ton, der Premium trägt.</Bullet>
             </div>
           </Card>
 
           <Card>
             <div className="text-xs" style={{ color: THEME.faint }}>Was du nicht bekommst</div>
-            <div className="mt-3 text-xl font-semibold" style={{ color: THEME.ink }}>Keine Tapete.</div>
+            <div className="mt-3 text-xl font-semibold" style={{ color: THEME.ink }}>Keine Texttapete.</div>
             <div className="mt-3 space-y-3">
               <Bullet>Keine Buzzwords.</Bullet>
-              <Bullet>Keine „Wir helfen dir…“-Sätze.</Bullet>
+              <Bullet>Keine Floskeln.</Bullet>
               <Bullet>Keine künstliche Dringlichkeit.</Bullet>
             </div>
           </Card>
@@ -605,14 +605,14 @@ export default function LandingpageV3Preview() {
 
         <section className="mt-10 grid gap-6 lg:grid-cols-2">
           <Card>
-            <div className="text-xs" style={{ color: THEME.faint }}>Beispiel-Urteil</div>
+            <div className="text-xs" style={{ color: THEME.faint }}>Beispiel-Analyse</div>
             <div className="mt-3 text-2xl font-semibold" style={{ fontFamily: "ui-serif, Georgia, Cambria, Times New Roman, Times, serif" }}>
-              „Das klingt seriös — aber es sagt nichts.“
+              „Das klingt gut — aber es sagt nicht, was du verkaufst.“
             </div>
             <div className="mt-3 text-sm leading-relaxed" style={{ color: THEME.ink2 }}>
               Wenn deine Seite jedem gefallen will, kauft niemand.
               <br />
-              Premium braucht Kante. Und Ruhe.
+              Premium braucht Kante, Struktur und Ruhe.
             </div>
           </Card>
 
@@ -621,9 +621,9 @@ export default function LandingpageV3Preview() {
             <div className="mt-3 text-sm leading-relaxed" style={{ color: THEME.ink2 }}>
               Weniger Elemente. Mehr Gewicht.
               <br />
-              Weniger Erklärung. Mehr Haltung.
+              Weniger Erklärung. Mehr Fokus.
               <br />
-              Mehr Raum, damit der Satz wirkt.
+              Mehr Raum, damit die Seite atmet.
             </div>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <GhostButton onClick={() => document.getElementById("faq")?.scrollIntoView({ behavior: "smooth" })}>
@@ -641,29 +641,29 @@ export default function LandingpageV3Preview() {
         <section className="mt-10 grid gap-6 lg:grid-cols-3">
           <Card>
             <div className="text-xs" style={{ color: THEME.faint }}>Preis</div>
-            <div className="mt-3 text-lg font-semibold" style={{ color: THEME.ink }}>Premium heißt: individuell.</div>
+            <div className="mt-3 text-lg font-semibold" style={{ color: THEME.ink }}>Individuelles Angebot.</div>
             <div className="mt-3 text-sm leading-relaxed" style={{ color: THEME.ink2 }}>
               Du bekommst zuerst eine Einschätzung.
               <br />
-              Danach ein klares Angebot.
+              Danach ein klares Angebot nach Umfang.
             </div>
           </Card>
           <Card>
             <div className="text-xs" style={{ color: THEME.faint }}>Zeit</div>
-            <div className="mt-3 text-lg font-semibold" style={{ color: THEME.ink }}>Schnell, wenn’s zählt.</div>
+            <div className="mt-3 text-lg font-semibold" style={{ color: THEME.ink }}>Tempo nach Scope.</div>
             <div className="mt-3 text-sm leading-relaxed" style={{ color: THEME.ink2 }}>
               Erste Rückmeldung in 24–48h.
               <br />
-              Umsetzung nach Scope.
+              Umsetzung nach Aufwand und Priorität.
             </div>
           </Card>
           <Card>
-            <div className="text-xs" style={{ color: THEME.faint }}>KI</div>
-            <div className="mt-3 text-lg font-semibold" style={{ color: THEME.ink }}>Keine Tool-Debatte.</div>
+            <div className="text-xs" style={{ color: THEME.faint }}>Ergebnis</div>
+            <div className="mt-3 text-lg font-semibold" style={{ color: THEME.ink }}>Klare Seite, klares Angebot.</div>
             <div className="mt-3 text-sm leading-relaxed" style={{ color: THEME.ink2 }}>
-              Wir reden nicht über „menschlich“.
+              Du hast danach eine Seite, die sofort erklärt,
               <br />
-              Wir reden über Wirkung.
+              was du verkaufst und warum es Premium ist.
             </div>
           </Card>
         </section>
@@ -679,14 +679,14 @@ export default function LandingpageV3Preview() {
               <div>
                 <div className="text-xs" style={{ color: THEME.faint }}>Letzter Satz</div>
                 <div className="mt-3 text-2xl font-semibold" style={{ fontFamily: "ui-serif, Georgia, Cambria, Times New Roman, Times, serif" }}>
-                  Du brauchst keine bessere Copy.
+                  Du brauchst keine längere Seite.
                   <br />
-                  Du brauchst eine klare Entscheidung.
+                  Du brauchst eine klare Positionierung.
                 </div>
                 <div className="mt-3 text-sm leading-relaxed" style={{ color: THEME.ink2 }}>
                   Wenn das stimmt: schick mir deine Seite.
                   <br />
-                  Der Rest ergibt sich.
+                  Ich melde mich mit nächstem Schritt.
                 </div>
               </div>
               <div className="flex flex-col gap-3">

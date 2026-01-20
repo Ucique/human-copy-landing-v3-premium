@@ -1,9 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import LegalLayout from "./LegalLayout";
 
 export default function Datenschutz() {
   return (
     <LegalLayout title="Datenschutzerklärung">
+      <Link to="/" className="text-sm">
+        ← Zurück
+      </Link>
       <section>
         <div>
           Verantwortliche Stelle
