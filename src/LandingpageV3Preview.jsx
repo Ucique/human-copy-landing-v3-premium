@@ -372,20 +372,20 @@ export default function LandingpageV3Preview() {
               </GhostButton>
             </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur">
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-12">
+              <div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur sm:col-span-3">
                 <div className="text-xs uppercase tracking-wide text-white/60">Antwort</div>
-                <div className="mt-2 text-2xl font-semibold leading-tight text-white">24–48h</div>
+                <div className="mt-2 text-xl font-semibold leading-tight text-white whitespace-normal break-words sm:text-[22px]">24–48h</div>
                 <div className="mt-1 text-sm text-white/60">für die erste Einschätzung</div>
               </div>
-              <div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur">
+              <div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur sm:col-span-3">
                 <div className="text-xs uppercase tracking-wide text-white/60">Format</div>
-                <div className="mt-2 text-2xl font-semibold leading-tight text-white">1:1</div>
+                <div className="mt-2 text-xl font-semibold leading-tight text-white whitespace-normal break-words sm:text-[22px]">1:1</div>
                 <div className="mt-1 text-sm text-white/60">direkt mit mir</div>
               </div>
-              <div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur">
-                <div className="text-xs uppercase tracking-wide text-white/60">Umfang</div>
-                <div className="mt-2 text-2xl font-semibold leading-tight text-white">Überarbeitung</div>
+              <div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur sm:col-span-6">
+                <div className="text-xs uppercase tracking-wide text-white/60">UMFANG</div>
+                <div className="mt-2 text-xl font-semibold leading-tight text-white whitespace-normal break-words sm:text-[22px]">Überarbeitung/Erstellung</div>
                 <div className="mt-1 text-sm text-white/60">Seite, Headline, CTA</div>
               </div>
             </div>
