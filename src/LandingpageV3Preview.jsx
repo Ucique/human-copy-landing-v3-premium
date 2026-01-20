@@ -87,7 +87,7 @@ function GhostButton({ children, className, ...props }) {
 function Kpi({ title, value, note, className, valueClassName }) {
   return (
     <div
-      className={cn("rounded-3xl p-5", className)}
+      className={cn("w-full rounded-3xl px-6 py-5 sm:min-w-[220px]", className)}
       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
     >
       <div className="text-xs" style={{ color: THEME.faint }}>{title}</div>
@@ -146,16 +146,27 @@ function TrustBlock() {
       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
     >
       {failed ? (
-        <div
-          className="h-32 w-32 rounded-full md:h-36 md:w-36"
-        />
+        <>
+          <div className="rounded-full shrink-0 md:hidden" style={{ width: 112, height: 112 }} />
+          <div className="hidden rounded-full shrink-0 md:block" style={{ width: 144, height: 144 }} />
+        </>
       ) : (
-        <img
-          src={profileCharlotte}
-          alt="Charlotte Grude"
-          onError={() => setFailed(true)}
-          className="h-32 w-32 rounded-full object-cover object-center md:h-36 md:w-36"
-        />
+        <>
+          <img
+            src={profileCharlotte}
+            alt="Charlotte Grude"
+            onError={() => setFailed(true)}
+            className="rounded-full object-cover object-center shrink-0 md:hidden"
+            style={{ width: 112, height: 112 }}
+          />
+          <img
+            src={profileCharlotte}
+            alt="Charlotte Grude"
+            onError={() => setFailed(true)}
+            className="hidden rounded-full object-cover object-center shrink-0 md:block"
+            style={{ width: 144, height: 144 }}
+          />
+        </>
       )}
       <div className="space-y-2">
         <div className="text-sm font-semibold" style={{ color: THEME.ink }}>
@@ -361,15 +372,14 @@ export default function LandingpageV3Preview() {
               </GhostButton>
             </div>
 
-            <div className="mt-10 grid gap-3 md:grid-cols-3">
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
               <Kpi title="Antwortzeit" value="24–48h" note="für die erste Einschätzung" />
               <Kpi title="Format" value="1:1" note="direkt mit mir" />
               <Kpi
                 title="Lieferung"
                 value="Überarbeitung"
                 note="Seite, Headlines, CTA"
-                className="px-6"
-                valueClassName="whitespace-nowrap"
+                valueClassName="whitespace-nowrap text-lg md:text-xl font-semibold leading-tight"
               />
             </div>
 
