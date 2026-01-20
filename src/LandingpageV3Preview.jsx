@@ -373,14 +373,21 @@ export default function LandingpageV3Preview() {
             </div>
 
             <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <Kpi title="Antwortzeit" value="24–48h" note="für die erste Einschätzung" />
-              <Kpi title="Format" value="1:1" note="direkt mit mir" />
-              <Kpi
-                title="Lieferung"
-                value="Überarbeitung"
-                note="Seite, Headlines, CTA"
-                valueClassName="whitespace-nowrap text-lg md:text-xl font-semibold leading-tight"
-              />
+              <div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur">
+                <div className="text-xs uppercase tracking-wide text-white/60">Antwort</div>
+                <div className="mt-2 text-2xl font-semibold leading-tight text-white">24–48h</div>
+                <div className="mt-1 text-sm text-white/60">für die erste Einschätzung</div>
+              </div>
+              <div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur">
+                <div className="text-xs uppercase tracking-wide text-white/60">Format</div>
+                <div className="mt-2 text-2xl font-semibold leading-tight text-white">1:1</div>
+                <div className="mt-1 text-sm text-white/60">direkt mit mir</div>
+              </div>
+              <div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur">
+                <div className="text-xs uppercase tracking-wide text-white/60">Umfang</div>
+                <div className="mt-2 text-2xl font-semibold leading-tight text-white">Überarbeitung</div>
+                <div className="mt-1 text-sm text-white/60">Seite, Headline, CTA</div>
+              </div>
             </div>
 
             <div className="mt-10">
