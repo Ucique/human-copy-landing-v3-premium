@@ -1,9 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import LegalLayout from "./LegalLayout";
 
 export default function Impressum() {
   return (
     <LegalLayout title="Impressum">
+      <Link to="/" className="text-sm">
+        ← Zurück
+      </Link>
       <section>
         <div>
           Anbieter / Anschrift
