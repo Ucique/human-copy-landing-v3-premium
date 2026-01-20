@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Lock, Sparkles, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Frame, THEME } from "./theme";
+import { Frame, THEME } from "./theme.jsx";
 import logoMark from "./assets/logo-mark.png";
 import profileCharlotte from "./assets/profile-charlotte-grude.jpg";
 
@@ -113,7 +113,7 @@ function LogoMark() {
   if (failed) {
     return (
       <div
-        className="flex h-6 w-6 items-center justify-center rounded-xl text-[10px] font-semibold md:h-7 md:w-7"
+        className="flex h-6 w-6 items-center justify-center rounded-lg text-[10px] font-semibold md:h-7 md:w-7"
         style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2, color: THEME.accent }}
       >
         HC
@@ -126,7 +126,7 @@ function LogoMark() {
       src={logoMark}
       alt="Human Copy"
       onError={() => setFailed(true)}
-      className="h-6 w-6 rounded-xl object-cover md:h-7 md:w-7"
+      className="h-6 w-6 rounded-lg object-cover md:h-7 md:w-7"
       style={{ border: `1px solid ${THEME.stroke2}`, background: THEME.card2 }}
     />
   );
@@ -151,7 +151,7 @@ function TrustBlock() {
           alt="Charlotte Grude"
           onError={() => setFailed(true)}
           className="h-14 w-14 rounded-full object-cover md:h-16 md:w-16"
-          style={{ border: `1px solid ${THEME.stroke}`, background: THEME.card }}
+          style={{ border: "1px solid rgba(255,255,255,0.12)", background: THEME.card }}
         />
       )}
       <div className="space-y-1">
@@ -160,6 +160,9 @@ function TrustBlock() {
         </div>
         <div className="text-xs leading-relaxed" style={{ color: THEME.ink2 }}>
           Über ein Jahrzehnt Erfahrung. Keine Templates. Klare Urteile.
+        </div>
+        <div className="text-[11px]" style={{ color: THEME.faint }}>
+          Antwort in 24–48h. Diskret. 1:1.
         </div>
       </div>
     </div>
@@ -431,7 +434,7 @@ export default function LandingpageV3Preview() {
                       name="name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Name"
+                      placeholder="Dein Name"
                       disabled={isLocked}
                       className="w-full rounded-2xl px-4 py-3 text-sm outline-none transition"
                       style={{

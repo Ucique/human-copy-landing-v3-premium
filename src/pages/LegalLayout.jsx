@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Frame, THEME } from "../theme";
+import { Frame, THEME } from "../theme.jsx";
 import logoMark from "../assets/logo-mark.png";
 
 export default function LegalLayout({ title, children }) {
