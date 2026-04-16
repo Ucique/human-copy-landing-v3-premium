@@ -100,7 +100,7 @@ export default function Datenschutz() {
       </section>
 
       <section>
-        <div>Stand: 09. Januar 2026</div>
+        <div>Stand: 17. November 2023</div>
       </section>
     </LegalLayout>
   );
